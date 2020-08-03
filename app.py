@@ -7,9 +7,11 @@ from security import authenticate, identity
 from resources.user import UserRegister # Runs user file and verifies classes/methods etc
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'
+#app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False #To turn off Flask SQLAlchemy modifications tracker
 app.config['PROPAGATE_EXCEPTIONS'] = True # To allow flask propagating exception even if debug is set to false on app
 app.secret_key = 'jose'
